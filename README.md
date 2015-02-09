@@ -7,6 +7,8 @@ A video browser I built to help sync videos between computers
  - It will list out all the files that are on each, and tell you if the files exist on the other PCs
  - It will auto download info for movies, if a directory is tagged as a movies directory
 
+![What it looks like](http://i.imgur.com/T3OCw17.png)
+
 ###How do I use this?###
  - Install node.js
  - CD to the root directory and `npm install` to install the modules
@@ -19,5 +21,3 @@ A video browser I built to help sync videos between computers
 
 ###Credits###
  - The icons are [Silk Icons](http://www.famfamfam.com/lab/icons/silk/)
-
-![What it looks like](http://i.imgur.com/T3OCw17.png)
