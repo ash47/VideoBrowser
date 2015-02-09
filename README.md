@@ -19,3 +19,5 @@ A video browser I built to help sync videos between computers
 
 ###Credits###
  - The icons are [Silk Icons](http://www.famfamfam.com/lab/icons/silk/)
+
+![What it looks like](http://i.imgur.com/T3OCw17.png)
