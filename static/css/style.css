@@ -1,0 +1,186 @@
+/* The filelist table */
+#fileListTable {
+	border:1px solid #000;
+	
+	width:100%;
+}
+
+/* The filelist table cells */
+#fileListTable tr td, #fileListTable tr th {
+	padding:4px;
+}
+
+#fileListTableHeadings {
+	background:#000;
+	
+	position: fixed;
+	top:8px;
+	right:8px;
+}
+
+/* The filelist table cells */
+#fileListTableHeadings tr td, #fileListTableHeadings tr th {
+	padding:4px;
+}
+
+/* Main container for file list */
+#fileList {
+	margin-left:16px;
+}
+
+/* Main container for menu */
+#menu {
+	position: fixed;
+	top:30px;
+	left:0px;
+}
+
+#slideMenu {
+	float:left;
+	
+	width:12px;
+	height:248px;
+	background:#9bbb59;
+	
+	margin:0px;
+	
+	border:1px solid #000;
+	border-left:0px;
+}
+
+#menuContent {
+	float:left;
+	display:none;
+	
+	width:148px;
+	height: 240px;
+	
+	background:#d9d9d9;
+	
+	padding:4px;
+	
+	border:1px solid #000;
+	border-left:0px;
+	
+	text-align:center;
+}
+
+/* The ul that contains the list of ways to sort a movie */
+#movieSortList {
+	list-style-type: none;
+	
+	padding:0px;
+	margin:0px;
+}
+
+/* A sortable, draggable box */
+#movieSortList li {
+	border:1px solid #000;
+	background:#a6a6a6;
+	
+	width:140px;
+	padding:4px;
+	margin-bottom:4px;
+	
+	text-align:left;
+	vertical-align:center;
+}
+
+/* The server has this file */
+.serverHasOdd {
+	background:#9bbb59 url('/icons/tick.png') no-repeat center;
+}
+
+.serverHasEven {
+	background:#76933c url('/icons/tick.png') no-repeat center;
+}
+
+/* The server doesn't have this file */
+.serverDoesntHaveOdd {
+	background:#c0504d url('/icons/cross.png') no-repeat center;
+}
+
+.serverDoesntHaveEven {
+	background:#963634 url('/icons/cross.png') no-repeat center;
+}
+
+/* The server doesn't know anything about this file */
+.serverDoesntKnowOdd {
+	background:#ffc000 url('/icons/cross.png') no-repeat center;
+}
+
+.serverDoesntKnowEven {
+	background:#f79646 url('/icons/cross.png') no-repeat center;
+}
+
+/* Server has/doesnt have a file */
+.serverHas {
+	background:#0F0 url('/icons/tick.png') no-repeat center;
+}
+
+.serverDoesntHave {
+	background:#F00 url('/icons/cross.png') no-repeat center;
+}
+
+.serverDoesntKnow {
+	background:#FF0 url('/icons/cross.png') no-repeat center;
+}
+
+.serverHasWrongSize {
+	background:#00F url('/icons/tick.png') no-repeat center;
+}
+
+/* color for odd rows */
+.odd {
+	background:#d9d9d9;
+}
+
+/* color for even rows */
+.even {
+	background:#a6a6a6;
+}
+
+.subFile {
+	background:#eee;
+}
+
+/* Contains image titles and when clicked on, navigates to other directories */
+.linkContainer {
+	vertical-align:top;
+}
+
+/* Container for posters */
+.posterContainer {
+	vertical-align:top;
+}
+
+/* Images inside the link container */
+.posterContainer img {
+	max-height:120px;
+	max-width:90px;
+	
+	float:right;
+}
+
+/* The rating the floats to the top right */
+.rating {
+	float:right;
+	text-align:center;
+}
+
+/* Contains the plot for each movie */
+.plot {
+	padding:8px;
+	padding-top:0px;
+}
+
+/* The height of the movies page */
+.moviesHeight {
+	height:120px;
+}
+
+/* The header for filename */
+.filenameHeader {
+	text-align:left;
+	width:100%;
+}

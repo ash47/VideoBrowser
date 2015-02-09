@@ -1,0 +1,35 @@
+[
+{
+	"name": "Avalanche",
+	"sort": "remote",
+	"ip": "192.168.1.1",
+	"user": "wii",
+	"password": "wii",
+	"root": "Videos/"
+},
+
+{
+	"name": "Volcano",
+	"sort": "remote",
+	"ip": "192.168.1.2",
+	"user": "wii",
+	"password": "wii",
+	"root": "Videos/"
+},
+
+{
+	"name": "Wildfire",
+	"sort": "remote",
+	"ip": "192.168.1.10",
+	"user": "wii",
+	"password": "wii",
+	"root": ""
+},
+
+{
+	"name": "USBHDD",
+	"sort": "local",
+	"path": "",
+	"root": "Z:"
+}
+]
