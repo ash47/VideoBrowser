@@ -19,20 +19,20 @@ var specialHeights = new Array('movies');
 // Create a link
 function createLink(txt) {
 	var link = $('<td class="linkContainer">'+txt+'</td>')
-	
+
 	link.click(function() {
 		socket.emit('cd', txt);
 	});
-	
+
 	// Is this a special dir?
 	if(specialDir) {
 		// Store a quick link
 		quickLink[txt] = link;
-		
+
 		// Grab the special info for this
 		getSpecial(txt, specialDir);
 	}
-	
+
 	return link;
 }
 
@@ -48,7 +48,7 @@ function getSpecial(title, sort) {
 			processSpecial(title, sort);
 		});
 	}
-	
+
 	// Rating stuff
 	if(ratingList[title]) {
 		processSpecial(title, sort);
@@ -65,18 +65,18 @@ function getSpecial(title, sort) {
 function processSpecial(title, sort) {
 	// Grab link
 	var l = quickLink[title];
-	
+
 	// Reset link
 	l.html(title);
-	
+
 	var ratingCon = $('<span class="rating"></span>');
 	l.append(ratingCon);
-	
+
 	// Push the title on
 	if(ratingList[title]) {
 		// Grab the data
 		var data = ratingList[title];
-		
+
 		// Validate the data
 		if(data && data.rating) {
 			// Push rating in
@@ -85,34 +85,34 @@ function processSpecial(title, sort) {
 			ratingCon.append('<br>');
 		}
 	}
-	
+
 	// Push the rating IMAGE on
 	if(videoList[title]) {
 		// Grab the data
 		var data = videoList[title];
-		
+
 		// Validate the data
 		if(data && data.Title) {
 			// Add plot
 			if(data.Plot && data.Plot != 'N/A') {
 				l.append('<div class="plot">'+data.Plot+'</div>');
 			}
-			
+
 			// Aussie Rating
 			if(data.Poster && data.Poster != 'N/A') {
 				var p = posterLinkList[title];
 				p.html('');
-				
+
 				// Add poster
 				var img = $('<img src="'+sort+'/posters/'+title+'.png">');
 				p.append(img);
-				
+
 				// Allow poster to load directly from imdb
 				img.error(function() {
 					img.attr("src", data.Poster);
 				});
 			}
-			
+
 			// IMDB Rating
 			if(data.imdbRating && data.imdbRating != 'N/A') {
 				ratingCon.append(data.imdbRating+'/10');
@@ -141,32 +141,32 @@ function processFileList() {
 	removeFile('$RECYCLE.BIN');
 	removeFile('desktop.ini');
 	removeFile('System Volume Information');
-	
+
 	var sl = $('#movieSortList');	// Sort List
-	
+
 	var order = new Array();
-	
+
 	$('li', sl).each(function() {
 		order.push({
 			num: $(this).data('num'),
 			up:$(this).data('up')
 		});
 	});
-	
+
 	// Sort the array
 	fileList.sort(function(a, b) {
 		// Apply each filter in order
 		for(var i=0;i<order.length;i++) {
 			// Try this filter:
 			var r = filters[order[i].num].fnc(a, b, order[i].up);
-			
+
 			// If it isn't the same:
 			if(r != 0) {
 				// Return the number:
 				return r;
 			}
 		}
-		
+
 		// They must be the same
 		return 0;
 	});
@@ -176,15 +176,15 @@ function AccendButton(buttonStore) {
 	// Add a toggle button:
 	var btn = $('<img src="icons/arrow_up.png"/ style="margin-right:8px;float:left;">');
 	buttonStore.prepend(btn);
-	
+
 	// Initially enabled:
 	buttonStore.data("up", true);
-	
+
 	// Allow button to toggle:
 	btn.click(function() {
 		// Toggle build state:
 		buttonStore.data("up", !buttonStore.data("up"));
-		
+
 		// Toggle icon:
 		if(buttonStore.data("up")) {
 			btn.attr('src', 'icons/arrow_up.png');
@@ -192,7 +192,7 @@ function AccendButton(buttonStore) {
 			btn.attr('src', 'icons/arrow_down.png');
 		}
 	});
-	
+
 	// Return the button:
 	return btn;
 }
@@ -222,7 +222,7 @@ filters.push({
 		// Grab ratings
 		var dataa = ratingList[a.name];
 		var datab = ratingList[b.name];
-		
+
 		// Check if scores exist for each movie
 		if(dataa && dataa.rating) {
 			if(datab && datab.rating) {
@@ -251,14 +251,14 @@ filters.push({
 		// Grab where scores would be stored
 		var dataa = videoList[a.name];
 		var datab = videoList[b.name];
-		
+
 		// Check if scores exist for each movie
 		if(dataa && dataa.imdbRating != 'N/A') {
 			if(datab && datab.imdbRating != 'N/A') {
 				// Grab score of each movie
 				var a = parseFloat(dataa.imdbRating);
 				var b = parseFloat(datab.imdbRating);
-				
+
 				// Do the filter
 				if(up) {
 					return a - b;
@@ -285,7 +285,7 @@ function friendlyDiv(name) {
 	name = name.replace(/\&/g, '');
 	name = name.replace(/\(/g, '');
 	name = name.replace(/\)/g, '');
-	
+
 	return 'fd_'+name;
 }
 
@@ -293,45 +293,45 @@ function buildFileList() {
 	// Reset our file list
 	var l = $('#fileList');
 	l.html('');
-	
+
 	/* Create floating headers*/
 	var t = $('<table id="fileListTableHeadings" cellspacing="1"></table>');
 	l.append(t);
-	
+
 	var tr = $('<tr class="odd"></tr>');
 	t.append(tr);
-	
+
 	// Put server headings
 	for(var i=0;i<serverList.length;i++) {
 		tr.append('<th>'+serverList[i]+'</th>');
 	}
-	
+
 	/* Create table for file list */
 	var t = $('<table id="fileListTable" cellspacing="1"></table>');
 	l.append(t);
-	
+
 	// Create tr
 	var tr = $('<tr class="odd"></tr>');
 	t.append(tr);
-	
+
 	// Put server headings
 	tr.append('<th></th><th class="filenameHeader">Filename</th>');
-	
+
 	for(var i=0;i<serverList.length;i++) {
 		tr.append('<th>'+serverList[i]+'</th>');
 	}
-	
+
 	// If the row is odd or not
 	var odd = false;
-	
+
 	if(path != '') {
 		// Create ..
 		var tr = $('<tr class="even"></tr>');
 		t.append(tr);
-		
+
 		// blank cell
 		tr.append('<td></td>');
-		
+
 		var td = $('<td>..</td>');
 		tr.append(td);
 		td.click(function() {
@@ -343,47 +343,47 @@ function buildFileList() {
 	} else {
 		odd = true;
 	}
-	
+
 	for(var i=0;i<fileList.length;i++) {
 		// Grab the current file
 		var file = fileList[i];
-		
+
 		// Change odd
 		odd = !odd;
-		
+
 		// Get a div friendly title
 		ffile = friendlyDiv(file.name);
-		
+
 		// Create new tr
 		var tr = $('<tr id="'+ffile+'"></tr>');
 		t.append(tr);
-		
+
 		// Make it an odd or even row
 		if(odd) {
 			tr.attr('class', 'odd');
 		} else {
 			tr.attr('class', 'even');
 		}
-		
+
 		// Append section for poster
 		var posterTD = $('<td class="posterContainer"></td>');
 		posterLinkList[file.name] = posterTD;
 		tr.append(posterTD);
 		posterTD.html('<img src="icons/folder.png">');
-		
+
 		// Check if this is a special folder
 		if(specialHeights.indexOf(specialDir) != -1) {
 			// Add custom height class
 			posterTD.attr('class', posterTD.attr('class')+' '+specialDir+'Height')
-			
+
 			// Remove folder
 			posterTD.html('');
 		}
-		
+
 		// Append filename
 		var link = createLink(file.name);
 		tr.append(link);
-		
+
 		// Append which servers own it
 		for(var j=0;j<serverList.length;j++) {
 			if(file.has[j]) {
@@ -411,17 +411,17 @@ function buildFileList() {
 
 $(document).ready(function(){
 	// Create the socket:
-	socket = io.connect('http://'+serverIP+':1337');
-	
+	socket = io.connect('http://'+serverIP+':3000');
+
 	// Server sent list of servers over
 	socket.on('serverList', function (data) {
 		// Store the server list
 		serverList = data;
-		
+
 		// Ask for the root directory
 		socket.emit('cd', '');
 	});
-	
+
 	// Server sent current directory over
 	socket.on('cd', function (data) {
 		// Store the data
@@ -429,28 +429,28 @@ $(document).ready(function(){
 		fileList = data.files;
 		specialDir = data.special;
 		cdLegit = data.legit;
-		
+
 		// Update browser url
 		window.location.hash = '#'+path;
 		hash = window.location.hash
-		
+
 		processFileList();
 		buildFileList();
 	});
-	
+
 	// Server sent the contents of a dir over
 	socket.on('dir', function (data) {
 		// Grab the friendly div
 		var fdiv = $('#'+friendlyDiv(data.title));
-		
+
 		for(var i=0;i<data.files.length;i++) {
 			// Grab the file
 			var f = data.files[i];
-			
+
 			var l = '<td class="subFile"></td><td class="subFile">'+f.name+'</td>';
-			
+
 			var size = -1;
-			
+
 			for(var j=0;j<serverList.length;j++) {
 				// Check if this server has the file
 				if(f.has[j]) {
@@ -460,7 +460,7 @@ $(document).ready(function(){
 					} else {
 						l = l+'<td class="serverHas"></td>';
 					}
-					
+
 					// Store size
 					size = f.size[j];
 				} else {
@@ -472,41 +472,41 @@ $(document).ready(function(){
 					}
 				}
 			}
-			
+
 			// Append the new row
 			fdiv.after('<tr>'+l+'</tr>')
 		}
 	});
-	
+
 	// Hook into backs
 	$(window).bind('hashchange', function() {
 		if(hash != window.location.hash) {
 			socket.emit('cd', '..');
 		}
 	});
-	
+
 	// Build menu
 	var m = $('#menu');
-	
+
 	var cm = $('<div id="menuContent"></div>');
 	m.append(cm);
-	
+
 	/* MENU CONTENT */
 	var sa = $('<ul id="movieSortList"></ul>');
 	cm.append(sa);
-	
+
 	for(var i=0;i<filters.length;i++) {
 		var f = $('<li>'+filters[i].txt+'</li>');
 		f.data('num', i);
 		sa.append(f);
-		
+
 		// Add a accend/decend button:
 		AccendButton(f);
 	}
-	
+
 	// Enable the sorting:
 	sa.sortable();
-	
+
 	// Add sort button
 	var sortButton = $('<input type="button" value="Sort">');
 	cm.append(sortButton);
@@ -515,7 +515,7 @@ $(document).ready(function(){
 		processFileList();
 		buildFileList();
 	});
-	
+
 	// Add list button
 	var listButton = $('<input type="button" value="File List">');
 	cm.append(listButton);
@@ -525,15 +525,15 @@ $(document).ready(function(){
 			socket.emit('dir', fileList[i].name);
 		}
 	});
-	
+
 	/* Toggle button */
 	var sm = $('<div id="slideMenu"></div>');
 	m.append(sm);
-	
+
 	sm.click(function() {
 		// Toggle the content
 		cm.toggle();
-		
+
 		// Move file list over
 		var fl = $('#fileList');
 		if(cm.css('display') == 'none') {
